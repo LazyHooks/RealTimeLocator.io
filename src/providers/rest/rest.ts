@@ -29,6 +29,17 @@ export class RestProvider {
     return this.http.post(this.apiUrl+'api/stores', JSON.stringify(store_data),options);
   }
 
+
+  addStock(stock_data) {
+
+    let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
+    let options = {
+        headers: httpHeaders
+       }; 
+    return this.http.post(this.apiUrl+'api/stocks', JSON.stringify(stock_data),options);
+  }
+
+
   getStore(storeEmail) {
 
     /*let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
@@ -36,6 +47,15 @@ export class RestProvider {
         headers: httpHeaders
        }; */
     return this.http.get(this.apiUrl+'api/store/'+storeEmail);
+  }
+
+  getStoreForSearchedProduct(productName,currentTime) {
+
+    /*let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');   
+    let options = {
+        headers: httpHeaders
+       }; */
+    return this.http.get(this.apiUrl+'api/user_product_search/'+productName+'/'+currentTime);
   } 
 
 

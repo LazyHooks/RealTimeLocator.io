@@ -34,11 +34,19 @@ import { RestProvider } from '../../providers/rest/rest';
 export class UserInfoPage {
 
   storeForm: FormGroup; // This is the form we're creating.
+  createStoreError: string;
+  /*storeOpeningTime: string;
+  storeClosingTime:string;*/
 
   constructor(fb: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private auth: AuthService,private restService:RestProvider ) {
 		this.storeForm = fb.group({
 			storeName: '',
-			storeType: ''
+      storeType: '',
+      storeLocationCoordinatesLat: '',
+      storeLocationCoordinatesLon: '',
+      storeOpeningTime:'',
+      storeClosingTime:''
+
 		});
 
   }
@@ -55,7 +63,7 @@ export class UserInfoPage {
   createStore() {
     if(this.auth.authenticated){
       let data = this.storeForm.value;
-      let store_data = {storeEmail:this.auth.getEmail(),storeName:data.storeName,storeType:data.storeType}
+      let store_data = {storeEmail:this.auth.getEmail(),storeName:data.storeName,storeType:data.storeType,storeLocationCoordinates:[data.storeLocationCoordinatesLat,data.storeLocationCoordinatesLon],storeOpeningTime:data.storeOpeningTime,storeClosingTime:data.storeClosingTime}
       //console.log(store_data)
 
       this.restService.createStore(store_data).subscribe(
@@ -66,6 +74,7 @@ export class UserInfoPage {
           },
           err => {
             console.log(err)
+            this.createStoreError = err.message
           }
       );
     } 

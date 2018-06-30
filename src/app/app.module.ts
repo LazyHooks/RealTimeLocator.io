@@ -23,7 +23,8 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService } from '../services/auth.service';
 
-import { NgxErrorsModule } from '@ultimate/ngxerrors'
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
+
 import { RestProvider } from '../providers/rest/rest';
 
 

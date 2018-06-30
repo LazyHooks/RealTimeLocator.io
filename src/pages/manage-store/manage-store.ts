@@ -18,15 +18,6 @@ import {AuthService} from '../../services/auth.service';
 import { LoginPage } from '../login/login';
 import { RestProvider } from '../../providers/rest/rest';
 
-//import {NextPage} from '..pages/manage-stock/manage-stock';
-
-/**import a new page*/
-//import {managestock} from '../manage-stock/manage-stock';
-import {ManageStockPage} from '../manage-stock/manage-stock';
-
-
-
-
 /**
  * Generated class for the ManageStorePage page.
  *
@@ -44,6 +35,10 @@ export class ManageStorePage {
   storeEmail : string;
   storeName : string;
   storeType: string;
+  storeLocationCoordinatesLat :string;
+  storeLocationCoordinatesLon :string;
+  storeOpeningTime:string;
+  storeClosingTime:string;
 
   constructor(fb: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private auth: AuthService,private restService:RestProvider ) {
 
@@ -51,13 +46,6 @@ export class ManageStorePage {
 
   }
   initializeApp(){
-
-    
-managestock(){
-  this.navCtrl.push(ManageStockPage);
-}
-
-
 
     if(this.auth.authenticated){
 
@@ -68,38 +56,28 @@ managestock(){
         store => {
           console.log(store);
           
-          
-          
-        
-          
           this.storeName = store[0].storeName
           this.storeType = store[0].storeType
-          
+          this.storeLocationCoordinatesLat = store[0].storeLocationCoordinates[0]
+          this.storeLocationCoordinatesLon = store[0].storeLocationCoordinates[1]
+          this.storeOpeningTime = store[0].storeOpeningTime
+          this.storeClosingTime =store[0].storeClosingTime
 
         },
-
-
-
         err => {
           console.log(err)
         }
     );
 
 
-
-
-
-
-
-    
-
     }
-    //managestock() {
-      //  this.NavController.setRoot(NextPage);
-      //}
-
-    
   }
+  goToManageStocksPage(){
+
+    this.navCtrl.push('manage-stocks')
+  }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ManageStorePage');

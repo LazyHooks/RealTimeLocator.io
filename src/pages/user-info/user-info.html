@@ -18,10 +18,12 @@
   
 
   <div *ngIf="auth.authenticated">
-    <h5 class="text-primary">User Information</h5>
+    <h1>Register your store with us </h1>
+    <h5 class="text-primary">Store Information</h5>
     <!--<h4>
       <strong>UID:</strong> {{ auth.uid }}
     </h4>-->
+
     <h4>
       <strong>Email:</strong> {{ auth.getEmail() }}
     </h4>
@@ -42,12 +44,40 @@
       </ion-input>
     </ion-item>
 
+    <ion-item>
+        <ion-label>Store Opening Time</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="storeOpeningTime"></ion-datetime>
+      </ion-item>
 
+      <ion-item>
+          <ion-label>Store Closing Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="storeClosingTime"></ion-datetime>
+        </ion-item>
 
+ 
+
+          <ion-item>
+              <ion-label stacked>Store Location.</ion-label>
+              <ion-input formControlName="storeLocationCoordinatesLat" type="text" 
+                placeholder="Store Location Latitude.">
+              </ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label stacked>Store Location.</ion-label>
+              <ion-input formControlName="storeLocationCoordinatesLon" type="text" 
+                placeholder="Store Location Longitude.">
+              </ion-input>
+          </ion-item>
+
+		<div padding-horizontal>
+        <div class="form-error">{{createStoreError}}</div>
 
     <button ion-button block type="submit" [disabled]="!storeForm.valid">
       Add Store
     </button>
+		</div>
   </form>
-</div>  
+</div>
+
 </ion-content>

@@ -44,7 +44,7 @@ export class LoginPage {
 		};
 		this.auth.signInWithEmail(credentials)
 			.then(
-				() => this.navCtrl.push('user-info'),
+				() => this.navCtrl.push('manage-store'),
 				error => this.loginError = error.message
 			);
   }

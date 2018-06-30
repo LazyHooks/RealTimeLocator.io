@@ -17,6 +17,7 @@
   
 
   <div *ngIf="auth.authenticated">
+      <h1>Your store info </h1>
     <h5 class="text-primary">Store Information</h5>
     <!--<h4>
       <strong>UID:</strong> {{ auth.uid }}
@@ -31,9 +32,22 @@
     <h4>
       <strong>Store Type:</strong> {{ storeType }}
     </h4>
-    
+    <h4>
+        <strong>Store Location Latitude:</strong> {{ storeLocationCoordinatesLat }}
+      </h4>
 
-    <button ion-button round (click)="managestock()">Manage Stocks</button>
+      <h4>
+          <strong>Store Location Longitude:</strong> {{ storeLocationCoordinatesLon }}
+        </h4>
+
+    <h4>
+        <strong>Store Opening Time:</strong> {{ storeOpeningTime }}
+      </h4>
+    <h4>
+        <strong>Store Closing Time:</strong> {{ storeClosingTime }}
+      </h4>
+
+    <button ion-button round (click)="goToManageStocksPage()">Manage Stocks</button>
     <button ion-button round>Manage Transactions</button>
     <button class="button" (click)="logout()">Logout</button>
 
