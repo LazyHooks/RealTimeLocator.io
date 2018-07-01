@@ -48,7 +48,7 @@ export class ManageStocksPage {
 		this.stockForm = fb.group({
 			productName: '',
       productQuantity: '',
-      isAvailabile: '',
+      isAvailable: '',
       productSellPrice: ''
     });
     
@@ -92,7 +92,7 @@ export class ManageStocksPage {
       
       let store_data = {storeName:this.storeName,storeType:this.storeType,storeId:this.storeId,storeEmail:this.storeEmail,storeLocationCoordinates:[this.storeLocationCoordinatesLat,this.storeLocationCoordinatesLon],storeOpeningTime:this.storeOpeningTime,storeClosingTime:this.storeClosingTime} // stores the data of the store in which the stock belongs to.
       
-      let stock_data = {productName:data.productName,productQuantity:data.productQuantity,isAvailabile:data.isAvailabile,productSellPrice:data.productSellPrice,storeData:store_data}
+      let stock_data = {productName:data.productName,productQuantity:data.productQuantity,isAvailable:data.isAvailable,productSellPrice:data.productSellPrice,storeData:store_data}
       
       console.log(store_data)
       
