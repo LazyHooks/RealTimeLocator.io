@@ -15,6 +15,24 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //import { FirestoreProvider } from '../../providers/firestore/firestore';
 import {AuthService} from '../../services/auth.service';
+import { Component,ViewChild } from '@angular/core';
+import { } from '@types/googlemaps';
+import {
+  IonicPage,
+  NavController,
+  Loading,
+  LoadingController,
+  AlertController,
+  Alert,
+  NavParams
+} from 'ionic-angular';
+
+import { Observable } from 'rxjs/Observable';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+//import { FirestoreProvider } from '../../providers/firestore/firestore';
+import {AuthService} from '../../services/auth.service';
 import { LoginPage } from '../login/login';
 import { RestProvider } from '../../providers/rest/rest';
 
@@ -33,6 +51,17 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class UserInfoPage {
 
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
+
+  //isTracking = false;
+
+  currentLat: any;
+  currentLong: any;
+
+
+  marker: google.maps.Marker;
+
   storeForm: FormGroup; // This is the form we're creating.
   createStoreError: string;
   /*storeOpeningTime: string;
@@ -42,12 +71,14 @@ export class UserInfoPage {
 		this.storeForm = fb.group({
 			storeName: '',
       storeType: '',
-      storeLocationCoordinatesLat: '',
-      storeLocationCoordinatesLon: '',
+      //storeLocationCoordinatesLat: '',
+      //storeLocationCoordinatesLon: '',
       storeOpeningTime:'',
       storeClosingTime:''
 
-		});
+    });
+    
+    this.initializeApp();
 
   }
 
@@ -60,6 +91,58 @@ export class UserInfoPage {
       this.navCtrl.push(LoginPage)
     
   }
+
+
+  initializeApp(){
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+
+        this.currentLat = position.coords.latitude;
+        
+        this.currentLong = position.coords.longitude;
+
+        let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        
+        var mapProp = {
+          center: location,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        
+        this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+        //if (!this.marker) {
+        this.marker = new google.maps.Marker({
+
+          position: location,
+          map: this.map,
+          title: 'Got you!'
+
+        });
+
+        /*}
+        else {
+
+          this.marker.setPosition(location);
+        }*/
+
+      
+      
+      
+      });
+
+
+    }
+
+    else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
+
+
+    }
+
   createStore() {
     if(this.auth.authenticated){
       let data = this.storeForm.value;
@@ -78,6 +161,8 @@ export class UserInfoPage {
           }
       );
     } 
+
+}
 
 }
 
