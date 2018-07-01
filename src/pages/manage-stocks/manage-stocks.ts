@@ -38,9 +38,10 @@ export class ManageStocksPage {
   storeName : string;
   storeType: string;
   storeId: string;
+  displayAfterAddingStock: string = '' ;
   //storeLocationCoordinates:any[];
-  storeLocationCoordinatesLat:String;
-  storeLocationCoordinatesLon:String;
+  storeLocationCoordinatesLat:string;
+  storeLocationCoordinatesLon:string;
   storeOpeningTime:string;
   storeClosingTime:string;
 
@@ -108,6 +109,10 @@ export class ManageStocksPage {
             console.log(err)
           }
       );
+      this.displayAfterAddingStock = 'Stock added . Add another maybe. '
+
+
+
     }
 
   }
